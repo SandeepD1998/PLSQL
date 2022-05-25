@@ -48,5 +48,21 @@ exec pro_moistore;
 set serveroutput on
             
        select * from output_tbl;     
+       
+       select substr(cust_name,3,4) from customer;
+       select cust_name from customer;
+       
+       
         
 
+---SQL QUEREY
+SELECT SPECIFICATION_MIX,ACTUAL_VALUE,CASE WHEN SPECIFICATION_MIX LIKE 'Ash%' THEN ACTUAL_VALUE
+    ELSE 0
+        END ASH_VAL,
+    CASE WHEN SPECIFICATION_MIX LIKE 'Moisture%' THEN ACTUAL_VALUE
+    ELSE 0
+        END MOISTURE_VAL,
+    CASE WHEN SPECIFICATION_MIX LIKE 'Protein%' THEN ACTUAL_VALUE
+    ELSE 0
+        END PROTIEN_VAL
+FROM INPUT;

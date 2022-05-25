@@ -74,5 +74,18 @@ set serveroutput on
 exec pro_edu_agency;
 
 select * from agency_tgt;
+truncate table agency_tgt;
+
+
+create or replace procedure pro_agency as
+cursor get_data is select * from agency_src;
+ begin
+ for i in get_data loop
+            insert into agency_tgt values(i.agency,i.program_name,i.fiscal_year,i.original_appr_amount,
+            (select sum(original_appr_amount) from agency_src where program_name=i.program_name),
+            (select sum(original_appr_amount) from agency_src where agency=i.agency),
+            (select sum(original_appr_amount) from agency_src));
+end loop;
+end;
 
 
